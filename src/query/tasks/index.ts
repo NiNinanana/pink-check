@@ -6,6 +6,7 @@ import {
   TaskListResponse,
   TaskResponse,
   TaskStatus,
+  Task,
 } from "@/src/types/task";
 import { tasksKeys } from "./keys";
 
@@ -37,5 +38,20 @@ export const usePatchTaskStatus = () => {
 export const useDeleteTask = () => {
   return useMutation({
     mutationFn: ({ id }: { id: string }) => axios.delete(`/api/task/${id}`),
+  });
+};
+
+export const useGetTask = (id: string) => {
+  return useQuery({
+    queryKey: tasksKeys.detail(id),
+    queryFn: () => axios.get<TaskResponse>(`/api/task/${id}`),
+    select: (res) => res.data,
+  });
+};
+
+export const usePutTask = () => {
+  return useMutation({
+    mutationFn: ({ task, id }: { task: Task; id?: string }) =>
+      axios.put(`/api/task/${id}`, { task }),
   });
 };

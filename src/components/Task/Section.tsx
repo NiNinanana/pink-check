@@ -41,7 +41,12 @@ const TaskSection = ({ title, taskStatus }: TaskSectionProps) => {
       </div>
       <div className="flex flex-col gap-3">
         {data?.tasks.map((task) => (
-          <Task id={task.id} title={task.title} key={task.id} />
+          <Task
+            id={task.id}
+            title={task.title}
+            key={task.id}
+            assignees={task.assignees}
+          />
         ))}
       </div>
     </div>
