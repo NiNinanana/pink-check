@@ -26,3 +26,10 @@ export const usePostTask = () => {
       axios.post<TaskResponse>("/api/task", { task }),
   });
 };
+
+export const usePatchTaskStatus = () => {
+  return useMutation({
+    mutationFn: ({ taskStatus, id }: { taskStatus: TaskStatus; id: string }) =>
+      axios.patch(`/api/task/${id}/change-status`, { status: taskStatus }),
+  });
+};
