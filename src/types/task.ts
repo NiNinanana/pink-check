@@ -11,3 +11,7 @@ export interface Task {
 }
 
 export type TaskForm = Pick<Task, "title" | "assignees">;
+
+export interface TaskResponse {
+  tasks: Task[];
+}
