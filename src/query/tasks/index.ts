@@ -33,3 +33,9 @@ export const usePatchTaskStatus = () => {
       axios.patch(`/api/task/${id}/change-status`, { status: taskStatus }),
   });
 };
+
+export const useDeleteTask = () => {
+  return useMutation({
+    mutationFn: ({ id }: { id: string }) => axios.delete(`/api/task/${id}`),
+  });
+};

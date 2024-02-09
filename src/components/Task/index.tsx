@@ -3,7 +3,7 @@
 import React from "react";
 import { Menu } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
-import { usePatchTaskStatus } from "@/src/query/tasks";
+import { useDeleteTask, usePatchTaskStatus } from "@/src/query/tasks";
 import { TaskStatus } from "@/src/types/task";
 import { useQueryClient } from "@tanstack/react-query";
 import { tasksKeys } from "@/src/query/tasks/keys";
@@ -14,11 +14,17 @@ interface TaskProps {
 }
 
 const Task = ({ title, id }: TaskProps) => {
-  const { mutateAsync } = usePatchTaskStatus();
+  const { mutateAsync: patchMutateAsync } = usePatchTaskStatus();
+  const { mutateAsync: deleteMutateAsync } = useDeleteTask();
   const queryClient = useQueryClient();
 
   const handleChangeStatus = async (status: TaskStatus) => {
-    await mutateAsync({ taskStatus: status, id });
+    await patchMutateAsync({ taskStatus: status, id });
+    queryClient.refetchQueries({ queryKey: tasksKeys.all });
+  };
+
+  const handleDeleteTask = async () => {
+    await deleteMutateAsync({ id });
     queryClient.refetchQueries({ queryKey: tasksKeys.all });
   };
 
@@ -61,6 +67,7 @@ const Task = ({ title, id }: TaskProps) => {
           <Menu.Item
             as="button"
             className="px-5 py-1 text-red-500 hover:bg-gray-100"
+            onClick={handleDeleteTask}
           >
             삭제
           </Menu.Item>
