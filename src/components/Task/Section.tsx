@@ -10,7 +10,7 @@ import {
   PlayCircleIcon,
 } from "@heroicons/react/24/outline";
 import { TaskStatus } from "@/src/types/task";
-import { useGetTasks } from "../query/tasks";
+import { useGetTasks } from "../../query/tasks";
 
 interface TaskSectionProps {
   title: string;

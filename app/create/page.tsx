@@ -4,15 +4,24 @@ import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { TaskForm } from "@/src/types/task";
+import { usePostTask } from "@/src/query/tasks";
+import { useRouter } from "next/navigation";
+import useToast from "@/src/utils/toast";
 
 const MOCK_NAMES = ["원영", "유진", "이서", "리즈", "가을", "레이"];
 
 const CreatePage = () => {
+  const { push } = useRouter();
+  const { show } = useToast();
   const { handleSubmit, register, setValue, watch } = useForm<TaskForm>();
   const assignees = watch().assignees || [];
 
+  const { mutate } = usePostTask();
+
   const onSubmit: SubmitHandler<TaskForm> = (data) => {
-    console.log(data);
+    mutate({ task: data });
+    show("🚀 생성 완료!");
+    push("/");
   };
 
   const handleAssignee = (name: string) => {

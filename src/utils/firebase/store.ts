@@ -5,7 +5,7 @@ export const firebaseCollections = {
   task: "task",
 };
 
-const firebaseFirestore = getFirestore(firebaseApp);
+export const firebaseFirestore = getFirestore(firebaseApp);
 
 export const taskFirestore = collection(
   firebaseFirestore,
