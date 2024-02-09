@@ -18,6 +18,9 @@ const Task = ({ title }: TaskProps) => {
         </Menu.Button>
         <Menu.Items className="absolute right-0 z-10 mt-2 flex w-56 flex-col rounded-md bg-white shadow-lg">
           <Menu.Item as="button" className="px-5 py-1 hover:bg-gray-100">
+            시작 전으로 이동
+          </Menu.Item>
+          <Menu.Item as="button" className="px-5 py-1 hover:bg-gray-100">
             진행 중으로 이동
           </Menu.Item>
           <Menu.Item as="button" className="px-5 py-1 hover:bg-gray-100">

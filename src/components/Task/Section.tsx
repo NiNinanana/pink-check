@@ -7,29 +7,29 @@ import {
   PauseCircleIcon,
   PlayCircleIcon,
 } from "@heroicons/react/24/outline";
-
-type TaskKey = "not_started" | "progress" | "pending" | "completed";
+import { TaskStatus } from "@/src/types/task";
 
 interface TaskSectionProps {
   title: string;
-  taskKey: TaskKey;
+  TaskStatus: TaskStatus;
 }
 
-const getIcon = (taskKey: TaskKey) => {
-  if (taskKey === "not_started") return <PlayCircleIcon className="h-6 w-6" />;
-  if (taskKey === "progress")
+const getIcon = (TaskStatus: TaskStatus) => {
+  if (TaskStatus === "not_started")
+    return <PlayCircleIcon className="h-6 w-6" />;
+  if (TaskStatus === "progress")
     return <EllipsisHorizontalCircleIcon className="h-6 w-6" color="blue" />;
-  if (taskKey === "pending")
+  if (TaskStatus === "pending")
     return <PauseCircleIcon className="h-6 w-6" color="red" />;
-  if (taskKey === "completed")
+  if (TaskStatus === "completed")
     return <CheckCircleIcon className="h-6 w-6" color="green" />;
 };
 
-const TaskSection = ({ title, taskKey }: TaskSectionProps) => {
+const TaskSection = ({ title, TaskStatus }: TaskSectionProps) => {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex gap-2">
-        {getIcon(taskKey)}
+        {getIcon(TaskStatus)}
         <h2>{title}</h2>
       </div>
       <div className="flex flex-col gap-3">
