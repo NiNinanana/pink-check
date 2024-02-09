@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/src/components/layout/header";
 import QueryProvider from "@/src/query/provider";
 import { ToastContainer } from "@/src/utils/toast/container";
+import Navigation from "@/src/components/layout/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
         <QueryProvider>
           <Header />
           {children}
+          <Navigation />
           <ToastContainer />
         </QueryProvider>
       </body>
